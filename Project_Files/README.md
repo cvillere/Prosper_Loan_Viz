@@ -16,3 +16,6 @@ http://stackoverflow.com/questions/17215789/extract-a-substring-in-r-according-t
 
 Remove duplicates in a dataset in R:
 http://www.sthda.com/english/wiki/identifying-and-removing-duplicate-data-in-r
+
+bubble chart pack example
+https://jrue.github.io/coding/2014/exercises/basicbubblepackchart/

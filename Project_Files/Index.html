@@ -21,26 +21,72 @@
           width  = 1400 - margin,
           height = 600  - margin;
 
+
       d3.select("body")
         .append("h2")
         .text("Total Loaned Amount on Prosper By Category (2007-2014)");
 
-      d3.select("svg")
-        .selectAll("circle")
-        .data(data)
-        .enter()
-        .append("circle")
+      var diameter = 500;
+      var color    = d3.scale.category20b();
+
+      var bubble = d3.layout.pack()
+          .sort(null)
+          .size([diameter, diameter])
+          .padding(1.5);
+
+      var svg = d3.select("body")
+          .append("svg")
+          .attr("width", width + margin)
+          .attr("height", height + margin)
+          .attr("class", "bubble");
+
+      var bubbles = svg.append("g")
+          .attr("transform", "translate(0,0)")
+          .selectAll(".bubble")
+          //.selectAll("bubble")
+          .data(data)
+          .enter()
+          //.append("bubble");
+
+      bubbles.append("circle")
+          .attr("r", function(d){ return d["total_loan"];})
+          .attr("cx", function(d){ return 5;})
+          .attr("cy", function(d){ return 5;})
+          .style("fill", function(d){return color(d.color);});
+
+      bubbles.append("text")
+          .attr("x", function(d){ return 5;})
+          .attr("y", function(d){ return 5;})
+          .attr("text-anchor", "middle")
+          .text(function(d){ return d["CreationYear"];})
+          .style({
+            "fill": "black",
+            "font-family": "Helvetica Neue, Helvetica, Arial, san-serif",
+            "font-size": "12px"
+          });
 
 
 
 
 
-    };
+      var bubble_extent = d3.extent(data, function(d){
+        return d["total_loan"]
+      })
+
+      var loan_scale = d3.scale.linear()
+        .range([height, margin])
+        .domain(bubble_extent);
+
+
+
+
+
+};
   </script>
 </head>
 <body>
   <script type="text/javascript">
-  d3.csv("Grouped.Totals.csv", draw);
+  d3.csv("Grouped_Totals.csv", draw);
   </script>
 </body>
 </html>
