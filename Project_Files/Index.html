@@ -6,7 +6,7 @@
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
   <style>
-  h1 {
+  h2 {
     text-align: center;
   }
   </style>
@@ -20,6 +20,16 @@
       var margin = 75,
           width  = 1400 - margin,
           height = 600  - margin;
+
+      d3.select("body")
+        .append("h2")
+        .text("Total Loaned Amount on Prosper By Category (2007-2014)");
+
+      d3.select("svg")
+        .selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
 
 
 
