@@ -27,7 +27,11 @@
         .text("Total Loaned Amount on Prosper By Category (2007-2014)");
 
       var diameter = 500;
-      var color    = d3.scale.category20b();
+      var color    = d3.scale.ordinal()
+              .domain([-50, 50])
+              .range(["#FA0303", "#FE7F7F"]);
+
+      var maxRadius = 30;
 
       var bubble = d3.layout.pack()
           .sort(null)
@@ -40,19 +44,26 @@
           .attr("height", height + margin)
           .attr("class", "bubble");
 
+      var nodes = bubble.nodes({children:data}).filter(function(d) { return !d.children; });
+
       var bubbles = svg.append("g")
           .attr("transform", "translate(0,0)")
           .selectAll(".bubble")
           //.selectAll("bubble")
-          .data(data)
+          .data(nodes)
           .enter()
           //.append("bubble");
 
+      var scaleRadius = d3.scale.linear()
+            .domain([d3.min(data, function(d){return d["total_loan"]})],
+                    [d3.max(data, function(d){return d["total_loan"]})])
+            .range([5, 25]);
+
       bubbles.append("circle")
-          .attr("r", function(d){ return d["total_loan"];})
+          .attr("r", function(d){ return scaleRadius }
           .attr("cx", function(d){ return 5;})
           .attr("cy", function(d){ return 5;})
-          .style("fill", function(d){return color(d.color);});
+          .style("fill", function(d){return color(d.value)});
 
       bubbles.append("text")
           .attr("x", function(d){ return 5;})
@@ -73,9 +84,7 @@
         return d["total_loan"]
       })
 
-      var loan_scale = d3.scale.linear()
-        .range([height, margin])
-        .domain(bubble_extent);
+      var loan_scale = d3.scale.linear().range([height, margin]).domain(bubble_extent);
 
 
 
