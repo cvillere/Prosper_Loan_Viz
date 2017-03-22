@@ -21,6 +21,11 @@
           width  = 1400 - margin,
           height = 600  - margin;
 
+      //coering data from strings to numbers
+      data.forEach(function(d) {
+        d.total_loan = +d["total_loan"];
+      });
+
 
       d3.select("body")
         .append("h2")
@@ -55,12 +60,12 @@
           //.append("bubble");
 
       var scaleRadius = d3.scale.linear()
-            .domain([d3.min(data, function(d){return d["total_loan"]})],
-                    [d3.max(data, function(d){return d["total_loan"]})])
-            .range([5, 25]);
+            .domain([d3.min(data, function(d){return d["total_loan"]}),
+                    d3.max(data, function(d){return d["total_loan"]})])
+            .range([5, 20]);
 
       bubbles.append("circle")
-          .attr("r", function(d){ return scaleRadius }
+          .attr("r", function(d){ return scaleRadius;})
           .attr("cx", function(d){ return 5;})
           .attr("cy", function(d){ return 5;})
           .style("fill", function(d){return color(d.value)});
