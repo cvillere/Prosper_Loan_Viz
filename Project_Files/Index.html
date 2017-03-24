@@ -21,11 +21,32 @@
           width  = 1400 - margin,
           height = 600  - margin;
 
+
+
       //coering data from strings to numbers
       data.forEach(function(d) {
-        d.total_loan = +d["total_loan"];
+        d["total_loan"] = +d["total_loan"];
+        d["CreationYear"] = format.parse(d["CreationYear"]);
+        d["ListingCategory..numeric."] = +d["ListingCategory..numeric"];
       });
 
+      //setting extents to use in scales for axes
+      var year_extent = d3.extent(data, function (d){
+          return d["CreationYear"];
+      });
+
+      var loan_extent = d3.extent(data, function (d){
+          return d["total_loan"]
+      });
+
+      //setting scales for use constructing axes
+      var year_scale = d3.time.scale()
+        .range([margin, width])
+        .domain(year_extent);
+
+      var loan_scale = d3.time.scale()
+        .range([height, margin])
+        .domain(loan_extent);
 
       d3.select("body")
         .append("h2")
