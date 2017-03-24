@@ -65,7 +65,7 @@
             .range([5, 20]);
 
       bubbles.append("circle")
-          .attr("r", function(d){ return scaleRadius;})
+          .attr("r", function(d){ return scaleRadius(d["total_loan"]);})
           .attr("cx", function(d){ return 5;})
           .attr("cy", function(d){ return 5;})
           .style("fill", function(d){return color(d.value)});
