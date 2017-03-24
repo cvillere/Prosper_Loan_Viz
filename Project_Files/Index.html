@@ -24,6 +24,7 @@
 
 
       //coering data from strings to numbers
+      var format = d3.time.format("%Y");
       data.forEach(function(d) {
         d["total_loan"] = +d["total_loan"];
         d["CreationYear"] = format.parse(d["CreationYear"]);
