@@ -6,6 +6,13 @@
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
   <style>
+
+  .axis line {
+    fill: None;
+    /*stroke: black;*/
+
+  }
+
   h2 {
     text-align: center;
   }
@@ -31,6 +38,45 @@
         d["ListingCategory..numeric."] = +d["ListingCategory..numeric"];
       });
 
+
+      d3.select("body")
+        .append("h2")
+        .text("Total Loaned Amount on Prosper By Category (2007-2014)");
+
+      var diameter = 500;
+      var color    = d3.scale.ordinal()
+              .domain([-50, 50])
+              .range(["#FA0303", "#FE7F7F"]);
+
+      var maxRadius = 30;
+
+      var bubble = d3.layout.pack()
+          .sort(null)
+          .size([diameter, diameter])
+          .padding(1.5);
+
+
+      //setting SVG object
+      var svg = d3.select("body")
+        .append("svg")
+          .attr("width", width + margin)
+          .attr("height", height + margin)
+        .append("g")
+          .attr("class", "chart")
+
+
+      var bubble_extent = d3.extent(data, function(d){
+        return d["total_loan"]
+      });
+
+      //scaling size of bubbles using total loan amount
+      var scaleRadius = d3.scale.linear()
+          .domain([d3.min(data, function(d){return d["total_loan"]}),
+                  d3.max(data, function(d){return d["total_loan"]})])
+          .range([10, 100]);
+
+
+
       //setting extents to use in scales for axes
       var year_extent = d3.extent(data, function (d){
           return d["CreationYear"];
@@ -49,27 +95,41 @@
         .range([height, margin])
         .domain(loan_extent);
 
-      d3.select("body")
-        .append("h2")
-        .text("Total Loaned Amount on Prosper By Category (2007-2014)");
+      //creating x-axis
+      var year_axis = d3.svg.axis()
+                            .scale(year_scale)
+                            .orient("bottom");
 
-      var diameter = 500;
-      var color    = d3.scale.ordinal()
-              .domain([-50, 50])
-              .range(["#FA0303", "#FE7F7F"]);
+      d3.select("svg")
+        .append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(year_axis);
 
-      var maxRadius = 30;
+      /*
+      //calling x-axis
+      svg.append("g")
+          .attr("class", "axis") //assign "axis" class
+          .call(year_axis);
+      */
 
-      var bubble = d3.layout.pack()
-          .sort(null)
-          .size([diameter, diameter])
-          .padding(1.5);
+      //creating y-axis
+      var loan_axis = d3.svg.axis()
+                            .scale(loan_scale)
+                            .orient("left");
 
-      var svg = d3.select("body")
-          .append("svg")
-          .attr("width", width + margin)
-          .attr("height", height + margin)
-          .attr("class", "bubble");
+      /*
+      //calling y-axis
+      d3.svg.append("g")
+          .attr("class", "axis") //assign "axis" class
+          .call(loan_axis);
+     */
+
+     d3.select("svg")
+       .append("g")
+       .attr("class", "y axis")
+       .attr("transform", "translate(" + margin + ",0)")
+       .call(loan_axis);
 
       var nodes = bubble.nodes({children:data}).filter(function(d) { return !d.children; });
 
@@ -81,20 +141,17 @@
           .enter()
           //.append("bubble");
 
-      var scaleRadius = d3.scale.linear()
-            .domain([d3.min(data, function(d){return d["total_loan"]}),
-                    d3.max(data, function(d){return d["total_loan"]})])
-            .range([5, 20]);
+
 
       bubbles.append("circle")
           .attr("r", function(d){ return scaleRadius(d["total_loan"]);})
-          .attr("cx", function(d){ return 5;})
-          .attr("cy", function(d){ return 5;})
+          .attr("cx", function(d){ return year_scale(d["CreationYear"]);})
+          .attr("cy", function(d){ return loan_scale(d["total_loan"]);})
           .style("fill", function(d){return color(d.value)});
 
       bubbles.append("text")
-          .attr("x", function(d){ return 5;})
-          .attr("y", function(d){ return 5;})
+          .attr("x", function(d){ return year_scale(d["CreationYear"]);})
+          .attr("y", function(d){ return loan_scale(d["total_loan"]);})
           .attr("text-anchor", "middle")
           .text(function(d){ return d["CreationYear"];})
           .style({
@@ -111,7 +168,6 @@
         return d["total_loan"]
       })
 
-      var loan_scale = d3.scale.linear().range([height, margin]).domain(bubble_extent);
 
 
 
