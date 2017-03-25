@@ -24,7 +24,7 @@
       function draw(data){
 
       "use strict";
-      var margin = 75,
+      var margin = 100,
           width  = 1400 - margin,
           height = 600  - margin;
 
@@ -35,7 +35,10 @@
       data.forEach(function(d) {
         d["total_loan"] = +d["total_loan"];
         d["CreationYear"] = format.parse(d["CreationYear"]);
-        d["ListingCategory..numeric."] = +d["ListingCategory..numeric"];
+        d["ListingCategory..numeric."] = +d["ListingCategory..numeric."];
+        d["Avg_Inc"] = +d["Avg_Inc"];
+        d["Avg_Loan"] = +d["Avg_Loan"];
+        return d;
       });
 
 
@@ -70,10 +73,12 @@
       });
 
       //scaling size of bubbles using total loan amount
+
+
       var scaleRadius = d3.scale.linear()
-          .domain([d3.min(data, function(d){return d["total_loan"]}),
-                  d3.max(data, function(d){return d["total_loan"]})])
-          .range([10, 100]);
+          .domain([d3.min(data, function(d){return d["Avg_Loan"]}),
+                  d3.max(data, function(d){return d["Avg_Loan"]})])
+          .range([25, 100]);
 
 
 
@@ -83,17 +88,17 @@
       });
 
       var loan_extent = d3.extent(data, function (d){
-          return d["total_loan"]
+          return d["total_loan"];
       });
 
       //setting scales for use constructing axes
       var year_scale = d3.time.scale()
         .range([margin, width])
-        .domain(year_extent);
+        .domain(year_extent).nice();
 
-      var loan_scale = d3.time.scale()
+      var loan_scale = d3.scale.linear()
         .range([height, margin])
-        .domain(loan_extent);
+        .domain(loan_extent).nice();
 
       //creating x-axis
       var year_axis = d3.svg.axis()
@@ -144,7 +149,7 @@
 
 
       bubbles.append("circle")
-          .attr("r", function(d){ return scaleRadius(d["total_loan"]);})
+          .attr("r", function(d){ return scaleRadius(d["Avg_Loan"]);})
           .attr("cx", function(d){ return year_scale(d["CreationYear"]);})
           .attr("cy", function(d){ return loan_scale(d["total_loan"]);})
           .style("fill", function(d){return color(d.value)});
@@ -153,7 +158,7 @@
           .attr("x", function(d){ return year_scale(d["CreationYear"]);})
           .attr("y", function(d){ return loan_scale(d["total_loan"]);})
           .attr("text-anchor", "middle")
-          .text(function(d){ return d["CreationYear"];})
+          .text(function(d){ return d["CreationYear"].getFullYear();})
           .style({
             "fill": "black",
             "font-family": "Helvetica Neue, Helvetica, Arial, san-serif",
@@ -166,7 +171,7 @@
 
       var bubble_extent = d3.extent(data, function(d){
         return d["total_loan"]
-      })
+      });
 
 
 

@@ -19,3 +19,6 @@ http://www.sthda.com/english/wiki/identifying-and-removing-duplicate-data-in-r
 
 bubble chart pack example
 https://jrue.github.io/coding/2014/exercises/basicbubblepackchart/
+
+adding axes to the chart
+http://alignedleft.com/tutorials/d3/axes
