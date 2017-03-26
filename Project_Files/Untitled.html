@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+  <script src="colorbrewer.min.js"></script>
+  <style>
+
+  .axis line {
+    fill: None;
+    /*stroke: black;*/
+
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  </style>
+</head>
+<body>
+  <script type ="text/javascript">
+
+var diameter = 750, //max size of the bubbles
+    color    = d3.scale.category20b(); //color category
+
+var bubble = d3.layout.pack()
+    .sort(null)
+    .size([diameter, diameter])
+    .padding(1.5);
+
+var svg = d3.select("body")
+    .append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter)
+    .attr("class", "bubble");
+
+d3.csv("Grouped_Totals.csv", function(error, data){
+
+     //coercing data from strings to numbers
+     var format = d3.time.format("%Y");
+     data.forEach(function (d){
+       d["CreationYear"] = format.parse(d["CreationYear"]);
+     });
+
+    //convert numerical values from strings to numbers
+    data = data.map(function(d){ d.value = +d["Avg_Loan"]; return d; });
+
+    //bubbles needs very specific format, convert data to this.
+    var nodes = bubble.nodes({children:data}).filter(function(d) { return !d.children; });
+
+    //setup the chart
+    var bubbles = svg.append("g")
+        .attr("transform", "translate(0,0)")
+        .selectAll(".bubble")
+        .data(nodes)
+        .enter();
+
+    //create the bubbles
+    bubbles.append("circle")
+        .attr("r", function(d){ return d.r; })
+        .attr("cx", function(d){ return d.x; })
+        .attr("cy", function(d){ return d.y; })
+        .style("fill", function(d) { return color(d.value); });
+
+    //format the text for each bubble
+    bubbles.append("text")
+        .attr("x", function(d){ return d.x; })
+        .attr("y", function(d){ return d.y + 5; })
+        .attr("text-anchor", "middle")
+        .text(function(d){ return d["CreationYear"].getFullYear(); })
+        .style({
+            "fill":"white",
+            "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
+            "font-size": "12px"
+        });
+})
+
+    </script>
+  </body>
+</html>
