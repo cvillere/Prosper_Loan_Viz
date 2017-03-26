@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
-  <script src="colorbrewer.min.js"></script>
   <style>
 
   .axis line {
@@ -22,8 +21,13 @@
 <body>
   <script type ="text/javascript">
 
-var diameter = 750, //max size of the bubbles
-    color    = d3.scale.category20b(); //color category
+
+var diameter = 750;//max size of the bubbles
+
+/*
+    color    = d3.scale.linear().domain([[d3.min(data, function(d){return d["Avg_Loan"]}),
+            d3.max(data, function(d){return d["Avg_Loan"]})]]).range(["white", "#4169e1"]); //creates heatmap of bubbles
+*/
 
 var bubble = d3.layout.pack()
     .sort(null)
@@ -43,6 +47,10 @@ d3.csv("Grouped_Totals.csv", function(error, data){
      data.forEach(function (d){
        d["CreationYear"] = format.parse(d["CreationYear"]);
      });
+
+     //var diameter = 750, //max size of the bubbles
+    var color = d3.scale.linear().domain([[d3.min(data, function(d){return d["Avg_Loan"]}),
+              d3.max(data, function(d){return d["Avg_Loan"]})]]).range(["white", "#4169e1"]); //creates heatmap of bubbles
 
     //convert numerical values from strings to numbers
     data = data.map(function(d){ d.value = +d["Avg_Loan"]; return d; });
