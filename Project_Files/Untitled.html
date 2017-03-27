@@ -36,7 +36,7 @@ var bubble = d3.layout.pack()
 
 var svg = d3.select("body")
     .append("svg")
-    .attr("width", diameter)
+    .attr("width", diameter + 200)
     .attr("height", diameter)
     .attr("class", "bubble");
 
@@ -46,11 +46,15 @@ d3.csv("Grouped_Totals.csv", function(error, data){
      var format = d3.time.format("%Y");
      data.forEach(function (d){
        d["CreationYear"] = format.parse(d["CreationYear"]);
+       d["Avg_Loan"] = +d["Avg_Loan"];
+       d["total_loan"] = +d["total_loan"];
      });
 
      //var diameter = 750, //max size of the bubbles
-    var color = d3.scale.linear().domain([[d3.min(data, function(d){return d["Avg_Loan"]}),
-              d3.max(data, function(d){return d["Avg_Loan"]})]]).range(["white", "#4169e1"]); //creates heatmap of bubbles
+    var color = d3.scale.linear().domain([d3.min(data, function(d){
+        return d["Avg_Loan"]}),
+          d3.max(data, function(d){return d["Avg_Loan"]})]).
+              range(["blue", "red"]); //creates heatmap of bubbles
 
     //convert numerical values from strings to numbers
     data = data.map(function(d){ d.value = +d["Avg_Loan"]; return d; });
@@ -65,9 +69,17 @@ d3.csv("Grouped_Totals.csv", function(error, data){
         .data(nodes)
         .enter();
 
+    //scaling size of bubbles using total loan amount
+
+
+    var scaleRadius = d3.scale.sqrt()
+        .domain([d3.min(data, function(d){return d["total_loan"]}),
+                d3.max(data, function(d){return d["total_loan"]})])
+        .range([20, 70]);
+
     //create the bubbles
     bubbles.append("circle")
-        .attr("r", function(d){ return d.r; })
+        .attr("r", function(d){ return scaleRadius(d["total_loan"]);})
         .attr("cx", function(d){ return d.x; })
         .attr("cy", function(d){ return d.y; })
         .style("fill", function(d) { return color(d.value); });
