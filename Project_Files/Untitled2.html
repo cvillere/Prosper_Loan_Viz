@@ -1,14 +1,18 @@
-//attempt at project with dimple.js
+<!DOCTYPE html>
 <html>
-<div id = 'chartContainer'>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"</script>
+  <head>
+    <meta charset="utf-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"</script>
+ </head>
+ <body>
+  <div id ='chartContainer'></div>
   <script type="text/javascript">
       var svg = dimple.newSvg("#chartContainer", 590, 400);
       d3.csv("Consum_vs_Spec.csv", function (data){
 
         //filter for 1 year
-        data = dimple.filterData(data, "Year", [
+        data = dimple.filterData(data, "CreationYear", [
           "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"
         ]);
 
@@ -16,8 +20,8 @@
         var indicator = new dimple.chart(svg, data);
 
         //Pick the default color and color when selected for indicator on right.
-        var defaultColor = indictor.defaultColors["orange"];
-        var indicatorColor = indicator.defaultColors["green"];
+        var defaultColor = indictor.defaultColors[0];
+        var indicatorColor = indicator.defaultColors[2];
 
         //The frame duration for the animation in milliseconds
         var frame = 2500;
@@ -28,8 +32,8 @@
         indicator.setBounds(434, 49, 153, 311)
 
         //add dates along the y axis
-        var y = indicator.addCategoryAxis("x", "CreationYear");
-        y.addOrderRule("Date", "Desc");
+        var y = indicator.addCategoryAxis("y", "CreationYear");
+        y.addOrderRule("Date", true);
 
         //use Count_Category_Num for bar size and hide the axis
         //Count_Category_Num is number of loans for each category/year
@@ -82,9 +86,9 @@
       //Draw the main chart
       var bubbles = new dimple.chart(svg, data);
       bubbles.setBounds(60, 50, 355, 310)
-      bubbles.addMeasureAxis("x", "Number of Loans");
-      bubbles.addMeasureAxis("y", "Total Loan Amount");
-      bubbles.addSeriesAxis(["CreationYear", "ListingCategory..numeric."],
+      bubbles.addMeasureAxis("x", "Count_Category_Num");
+      bubbles.addMeasureAxis("y", "total_loan");
+      bubbles.addSeriesAxis(["ListingCategory..numeric."],
                               dimple.plot.bubble)
       bubbles.addLegend(60, 10, 410, 60);
 
@@ -136,6 +140,6 @@
       }
 
     });
-</script>
-</div>
+    </script>
+  </body>
 </html>
