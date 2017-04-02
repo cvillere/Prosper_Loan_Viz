@@ -41,6 +41,14 @@
         return d;
       });
 
+      //convert numerical values from strings to numbers
+      data = data.map(function(d){
+        d.value = +d["Avg_Loan"];
+        return d;
+      });
+
+      console.log(data);
+
 
       d3.select("body")
         .append("h2")
@@ -66,6 +74,8 @@
           .attr("height", height + margin)
         .append("g")
           .attr("class", "chart")
+
+
 
 
       var bubble_extent = d3.extent(data, function(d){
