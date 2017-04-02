@@ -1,6 +1,8 @@
-Summary - in no more than 4 sentences, briefly introduce your data
-          visualization and add any context that can help readers
-          understand it
+Summary - I have created a Dimplejs scatterplot visualizing Prosper Loan data
+from 2007 to 2014. The x axis displays the number of loans for each loan
+category, while the y-axis shows what the average income is of the folks
+getting each loan type. The size of the bars on the right corresponds to the
+average loan size of each year. 
 
 
 Design - explain any design choices you made including changes to
