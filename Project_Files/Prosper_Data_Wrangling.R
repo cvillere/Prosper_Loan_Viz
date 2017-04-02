@@ -48,7 +48,7 @@ Prosper_Data <- Prosper_Data[,c(1:2,82,3:81)]
 
 
 subset_data <- subset(Grouped.Totals, 
-    Grouped.Totals["ListingCategory..numeric."] == 5, 15, 16, 17, 18, 19, 20)
+    Grouped.Totals$ListingCategory..numeric. %in% c(1, 2, 6, 15:20))
 
 
 p1 <- ggplot(aes(x = CreationYear, y = total_loan), data = subset_data) +
@@ -89,6 +89,35 @@ p1 <- ggplot(aes(x = CreationYear, y = total_loan), data = subset_data) +
 #13 to 14. cate. 19(vacation)
 #20) shoots up siginificantly from 11 to 12, before subsiding from 12 to 13 and
 #13 to 14. cate. 20(wedding)
+
+#data used for dimple.js graph
+subset_data <- subset(Grouped.Totals, 
+                      Grouped.Totals$ListingCategory..numeric. %in% c(1, 2, 6, 15:20))
+
+subset_data <- subset(subset_data, select = -debt_cate)
+
+subset_data$debt_cate = ifelse(subset_data$ListingCategory..numeric. == 1, 
+                        "Debt Consolidation", 
+                        ifelse(subset_data$ListingCategory..numeric. == 2, 
+                        "Home Improvement", 
+                        ifelse(subset_data$ListingCategory..numeric. == 6, 
+                        "Auto", 
+                        ifelse(subset_data$ListingCategory..numeric. == 15, 
+                        "Medical_Dental", 
+                        ifelse(subset_data$ListingCategory..numeric. == 16, 
+                        "Motorcycle", 
+                        ifelse(subset_data$ListingCategory..numeric. == 17, 
+                        "RV", 
+                        ifelse(subset_data$ListingCategory..numeric. == 18, 
+                        "Taxes", 
+                        ifelse(subset_data$ListingCategory..numeric. == 19, 
+                        "Vacation", 
+                        ifelse(subset_data$ListingCategory..numeric. == 20, 
+                        "Wedding", "Other")))))))))
+
+
+write.table(subset_data, file='Consum_vs_Spec.csv', quote=FALSE, sep=',', 
+            row.names = F)
 
 write.table(Grouped.Totals, file='Grouped_Totals.csv', quote=FALSE, sep=',', 
             row.names = F)
