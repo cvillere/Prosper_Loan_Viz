@@ -2,11 +2,23 @@ Summary - I have created a Dimplejs scatterplot visualizing Prosper Loan data
 from 2007 to 2014. The x axis displays the number of loans for each loan
 category, while the y-axis shows what the average income is of the folks
 getting each loan type. The size of the bars on the right corresponds to the
-average loan size of each year. 
+average loan size of each year.
 
 
-Design - explain any design choices you made including changes to
-         the visualization after collecting feedback
+Design - I added a new variable to the data for the sake of the legend. I wanted
+to show the loan type by its name instead of by the number through which it is
+identified in the data. This makes the legend more clear. I used a default color
+scheme to categorize the debt categories. Since its categorical data, it did not
+make sense to me to further complicate the color scheme. I liked tying the
+average loan size to the bars on the right because it shows an expansion of the
+prosper business heading into 2008, a contraction, then a
+corresponding increase coming out of the recession. I used a scatter plot
+because it most easily demonstrates the relationship amongst the different
+types of loans offered by prosper. Additionally, it allows for me to easily show
+the differences between specialty loan types and the more conventional ones, like
+debt consolidation, auto, and home improvement.
+
+
 
 Feedback -
 1) Labeling the x and y axes more clearly. I could tell their were categories,
