@@ -18,7 +18,7 @@ better labeling to make the chart more clear.
 
 4) When the animation gets to 2014, it skips back down to 2012 and then down
 to 2007 and circles back up to 2014. See if you can eliminate the intermittent
-skip and simply return the animation back to 2007. 
+skip and simply return the animation back to 2007.
 
 Resources -
 
@@ -33,3 +33,6 @@ http://alignedleft.com/tutorials/d3/axes
 
 Code used as base for creating bubble chart
 https://jrue.github.io/coding/2014/exercises/basicbubblepackchart/
+
+Code used as example for Dimple.js chart
+http://dimplejs.org/advanced_examples_viewer.html?id=advanced_storyboard_control
