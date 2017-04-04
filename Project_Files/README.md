@@ -34,6 +34,9 @@ better labeling to make the chart more clear.
 to 2007 and circles back up to 2014. See if you can eliminate the intermittent
 skip and simply return the animation back to 2007.
 
+5)Suggestion from someone in slack group to make it so the buttons contain the
+entire number on the right side. That change was made to improve the design.
+
 Resources -
 
 Obtaining loan year origination in R:
@@ -50,3 +53,6 @@ https://jrue.github.io/coding/2014/exercises/basicbubblepackchart/
 
 Code used as example for Dimple.js chart
 http://dimplejs.org/advanced_examples_viewer.html?id=advanced_storyboard_control
+
+Add title to Dimple.js chart
+http://simondfletcher.com/add-a-title-to-a-dimple-js-chart/
