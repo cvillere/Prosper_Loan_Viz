@@ -5,10 +5,7 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
     <style>
-    h1 {
-      color: black;
-      text-align: center;
-    }
+
     </style>
  </head>
  <body>
@@ -107,7 +104,7 @@
       //change the frame duration
       story.frameDuration = frame;
       //Order the storyboard by date
-      story.addOrderRule("Date")
+      story.addOrderRule("CreationYear")
 
       //Draw the bubble chart
       bubbles.draw();
