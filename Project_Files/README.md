@@ -27,7 +27,7 @@ but what we were looking at wasn't clear.
 2) The large number of debt consolidation loans is interesting, in addition to
 all the different categories of loans people take out.
 
-3) The design looked good, but I think the design looks good. Be sure to use
+3) The design looked good, but I labeling could be better. Be sure to use
 better labeling to make the chart more clear.
 
 4) When the animation gets to 2014, it skips back down to 2012 and then down
@@ -56,3 +56,6 @@ http://dimplejs.org/advanced_examples_viewer.html?id=advanced_storyboard_control
 
 Add title to Dimple.js chart
 http://simondfletcher.com/add-a-title-to-a-dimple-js-chart/
+
+Add customized labels to axes
+https://discussions.udacity.com/t/how-to-change-y-axis-label-in-dimple-js/209821

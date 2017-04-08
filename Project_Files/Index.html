@@ -92,11 +92,15 @@
       var bubbles = new dimple.chart(svg, data);
       bubbles.setBounds(260, 100, 455, 310)
       //bubbles.setBounds(60, 50, 355, 310)
-      bubbles.addMeasureAxis("x", "Count_Category_Num");
-      bubbles.addMeasureAxis("y", "Avg_Inc");
+      var x = bubbles.addMeasureAxis("x", "Count_Category_Num");
+      var y = bubbles.addMeasureAxis("y", "Avg_Inc");
       bubbles.addSeries(["debt_cate"],
                               dimple.plot.bubble)
       bubbles.addLegend(260, 55, 410, 60);
+
+      //add customized names to dimple.js chart
+      x.title = "Number of Loans";
+      y.title = "Average Monthly Income of Applicant";
 
       //Add a storyboard to the main chart and set the tick event
       var story = bubbles.setStoryboard("CreationYear", onTick);
