@@ -5,11 +5,25 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
     <style>
+    h1 {
+      text-align: center;
+    }
 
     </style>
  </head>
  <body>
+  <h1>Prosper Loan Data From 2007-2014</h1>
   <div id ='chartContainer'></div>
+  <div id="commentary"> Data used was one of suggested Udacity datasets, about
+    Prosper Loan Data. Data was wrangled to give each value
+    summed by year and loan category. I added a variable to give the loan
+    category name as well, which was used in the legend of the graph. My
+    two main findings are despite expanding their lines of business after
+    the great recession 0f 2008, debt consolidation continued to be their
+    growth avenue. Also, the year bars to the right show how the loan size,
+    along with the overall number of loans grew substantially from the bottom
+    of the recession to 2014.
+  </div>
   <script type="text/javascript">
       var svg = dimple.newSvg("#chartContainer", 1300, 500);
       d3.csv("Consum_vs_Spec.csv", function (data){
@@ -145,12 +159,6 @@
         }
         firstTick = false;
       }
-      //Add chart title
-      svg.append("text").attr("x", (svg[0][0].clientWidth / 2))
-         .attr("y", 32).attr("text-anchor", "middle")
-         .style("font-size", "20px").style("font-weight", "bold")
-         .text("Prosper Loan Data From 2007-2014");
-
 
     });
 
