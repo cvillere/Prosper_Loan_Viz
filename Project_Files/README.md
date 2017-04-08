@@ -37,6 +37,9 @@ skip and simply return the animation back to 2007.
 5)Suggestion from someone in slack group to make it so the buttons contain the
 entire number on the right side. That change was made to improve the design.
 
+6) Make storyboard a little slower, as it seems to progress a little too
+quickly to digest on a first run. 
+
 Resources -
 
 Obtaining loan year origination in R:
