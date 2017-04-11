@@ -15,13 +15,15 @@ prosper business heading into 2008, a contraction, then a
 corresponding increase coming out of the recession. I used a scatter plot
 because it most easily demonstrates the relationship amongst the different
 types of loans offered by prosper. Additionally, it allows for me to easily show
-the differences between specialty loan types and the more conventional ones, like debt consolidation, auto, and home improvement. Prosper's dominant line
+the differences between specialty loan types and the more conventional ones,
+like debt consolidation, auto, and home improvement. Prosper's dominant line
 of business is debt consolidation and despite their best efforts to broaden
-their offerings, debt consolidation continued to be their main product. 
+their offerings, debt consolidation continued to be their main product.
 
 
 
-Feedback -
+Feedback (Two PNG files show feedback from two people, and I received
+feedback from a couple relatives as well.) -
 1) Labeling the x and y axes more clearly. I could tell their were categories,
 but what we were looking at wasn't clear.
 
