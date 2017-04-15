@@ -1,4 +1,4 @@
-CreationYear,ListingCategory..numeric.,total_loan,Avg_Inc,Avg_Loan,Count_Category_Num,debt_cate
+CreationYear,ListingCategory..numeric.,Total_Loan_Amount,Avg_Applicant_Monthly_Income,Average_Loan_Size,Number_Of_Loans,Debt_Category
 2007,1,2763913,4483.083333,5500,382,Debt Consolidation
 2007,2,266002,4558.166667,7250,28,Home Improvement
 2007,6,80800,4583.333333,6000,13,Auto
