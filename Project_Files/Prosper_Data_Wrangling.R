@@ -118,11 +118,11 @@ subset_data$debt_cate = ifelse(subset_data$ListingCategory..numeric. == 1,
 
 
 #Rename some variables for better understanding by audience
-colnames(Consum_vs_Spec)[3] <- "Total_Loan_Amount"
-colnames(Consum_vs_Spec)[4] <- "Avg_Applicant_Monthly_Income"
-colnames(Consum_vs_Spec)[5] <- "Average_Loan_Size"
-colnames(Consum_vs_Spec)[6] <- "Number_Of_Loans"
-colnames(Consum_vs_Spec)[7] <- "Debt_Category"
+colnames(subset_data)[3] <- "Total Loan Amount"
+colnames(subset_data)[4] <- "Avg Applicant Monthly Income"
+colnames(subset_data)[5] <- "Average Loan Size"
+colnames(subset_data)[6] <- "Number Of Loans"
+colnames(subset_data)[7] <- "Debt Category"
 
 write.table(subset_data, file='Consum_vs_Spec.csv', quote=FALSE, sep=',', 
             row.names = F)
