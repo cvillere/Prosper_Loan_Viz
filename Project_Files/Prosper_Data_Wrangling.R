@@ -5,6 +5,7 @@ detach(package:plyr)
 library(dplyr)
 library(ggplot2)
 #install.packages(ggplot)
+library(magrittr)
 
 setwd("/Users/christianvillere/DandProjects/Data_Viz/Final_Project/Project_Files")
 Prosper_Data <- read.csv("prosperLoanData.csv")
@@ -115,6 +116,13 @@ subset_data$debt_cate = ifelse(subset_data$ListingCategory..numeric. == 1,
                         ifelse(subset_data$ListingCategory..numeric. == 20, 
                         "Wedding", "Other")))))))))
 
+
+#Rename some variables for better understanding by audience
+colnames(Consum_vs_Spec)[3] <- "Total_Loan_Amount"
+colnames(Consum_vs_Spec)[4] <- "Avg_Applicant_Monthly_Income"
+colnames(Consum_vs_Spec)[5] <- "Average_Loan_Size"
+colnames(Consum_vs_Spec)[6] <- "Number_Of_Loans"
+colnames(Consum_vs_Spec)[7] <- "Debt_Category"
 
 write.table(subset_data, file='Consum_vs_Spec.csv', quote=FALSE, sep=',', 
             row.names = F)
