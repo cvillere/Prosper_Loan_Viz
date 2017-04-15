@@ -23,14 +23,15 @@ their offerings, debt consolidation continued to be their main product.
 
 
 Feedback (Two PNG files show feedback from two people, and I received
-feedback from a couple relatives as well.) -
+feedback from a couple relatives as well. I did receive feedback from
+atleast 3 people.) -
 1) Labeling the x and y axes more clearly. I could tell their were categories,
 but what we were looking at wasn't clear.
 
 2) The large number of debt consolidation loans is interesting, in addition to
 all the different categories of loans people take out.
 
-3) The design looked good, but I labeling could be better. Be sure to use
+3) The design looked good, but axis labeling could be better. Be sure to use
 better labeling to make the chart more clear.
 
 4) When the animation gets to 2014, it skips back down to 2012 and then down
