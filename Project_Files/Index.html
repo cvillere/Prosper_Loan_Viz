@@ -46,7 +46,7 @@
         var indicatorColor = indicator.defaultColors[1];
 
         //The frame duration for the animation in milliseconds
-        var frame = 7500;
+        var frame = 9000;
 
         var firstTick = true;
 
@@ -59,7 +59,7 @@
 
         //use Avg_Loan for bar size and hide the axis
         //Avg_Loan is the avgerage loan size for each category/year
-        var x = indicator.addMeasureAxis("x", "Average_Loan_Size")
+        var x = indicator.addMeasureAxis("x", "Average Loan Size")
         x.hidden = true;
 
         //add the bars to the indicator and add event handlers
@@ -109,9 +109,9 @@
       var bubbles = new dimple.chart(svg, data);
       bubbles.setBounds(260, 100, 455, 310)
       //bubbles.setBounds(60, 50, 355, 310)
-      var x = bubbles.addMeasureAxis("x", "Number_Of_Loans");
-      var y = bubbles.addMeasureAxis("y", "Avg_Applicant_Monthly_Income");
-      bubbles.addSeries(["Debt_Category"],
+      var x = bubbles.addMeasureAxis("x", "Number Of Loans");
+      var y = bubbles.addMeasureAxis("y", "Avg Applicant Monthly Income");
+      bubbles.addSeries(["Debt Category"],
                               dimple.plot.bubble)
       bubbles.addLegend(260, 55, 410, 60);
 
